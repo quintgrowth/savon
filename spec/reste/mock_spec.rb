@@ -1,5 +1,5 @@
 require "spec_helper"
-require "savon/mock/spec_helper"
+require "reste/mock/spec_helper"
 
 describe "Savon's mock interface" do
   include Savon::SpecHelper

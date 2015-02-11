@@ -2,4 +2,4 @@ module Savon
   class ExpectationError < StandardError; end
 end
 
-require "savon/mock/expectation"
+require "reste/mock/expectation"

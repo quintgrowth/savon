@@ -1,9 +1,9 @@
-require "savon/options"
-require "savon/block_interface"
-require "savon/request"
-require "savon/builder"
-require "savon/response"
-require "savon/request_logger"
+require "reste/options"
+require "reste/block_interface"
+require "reste/request"
+require "reste/builder"
+require "reste/response"
+require "reste/request_logger"
 
 module Savon
   class Operation

@@ -1,7 +1,7 @@
-require "savon/operation"
-require "savon/request"
-require "savon/options"
-require "savon/block_interface"
+require "reste/operation"
+require "reste/request"
+require "reste/options"
+require "reste/block_interface"
 require "wasabi"
 
 module Savon

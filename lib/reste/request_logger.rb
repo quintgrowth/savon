@@ -1,4 +1,4 @@
-require "savon/log_message"
+require "reste/log_message"
 
 module Savon
   class RequestLogger

@@ -1,4 +1,4 @@
-require "savon/mock"
+require "reste/mock"
 
 module Savon
   module SpecHelper
