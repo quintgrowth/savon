@@ -1,5 +1,5 @@
-require "savon/header"
-require "savon/message"
+require "reste/header"
+require "reste/message"
 require "nokogiri"
 require "builder"
 require "gyoku"

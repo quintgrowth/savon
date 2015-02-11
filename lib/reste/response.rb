@@ -1,6 +1,6 @@
 require "nori"
-require "savon/soap_fault"
-require "savon/http_error"
+require "reste/soap_fault"
+require "reste/http_error"
 
 module Savon
   class Response

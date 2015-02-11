@@ -1,4 +1,4 @@
-require "savon/qualified_message"
+require "reste/qualified_message"
 require "gyoku"
 
 module Savon

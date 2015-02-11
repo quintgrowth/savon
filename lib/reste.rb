@@ -22,6 +22,6 @@ module Savon
 
 end
 
-require "savon/version"
-require "savon/client"
-require "savon/model"
+require "reste/version"
+require "reste/client"
+require "reste/model"
