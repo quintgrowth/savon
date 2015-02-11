@@ -173,7 +173,7 @@ describe "Options" do
       expect(response.http.body).to include("<soapenv:Envelope")
     end
 
-    it "when not set, Savon defaults to use :env as the namespace identifier for the SOAP envelope" do
+    it "when not set, Reste defaults to use :env as the namespace identifier for the SOAP envelope" do
       client = new_client(:endpoint => @server.url(:repeat))
       response = client.call(:authenticate)
 
@@ -198,26 +198,26 @@ describe "Options" do
   end
 
   context "global: raise_errors" do
-    it "when true, instructs Savon to raise SOAP fault errors" do
+    it "when true, instructs Reste to raise SOAP fault errors" do
       client = new_client(:endpoint => @server.url(:repeat), :raise_errors => true)
 
       expect { client.call(:authenticate, :xml => Fixture.response(:soap_fault)) }.
-        to raise_error(Savon::SOAPFault)
+        to raise_error(Reste::SOAPFault)
 
       begin
         client.call(:authenticate, :xml => Fixture.response(:soap_fault))
-      rescue Savon::SOAPFault => soap_fault
+      rescue Reste::SOAPFault => soap_fault
         # check whether the configured nori instance is used by the soap fault
         expect(soap_fault.to_hash[:fault][:faultcode]).to eq("soap:Server")
       end
     end
 
-    it "when true, instructs Savon to raise HTTP errors" do
+    it "when true, instructs Reste to raise HTTP errors" do
       client = new_client(:endpoint => @server.url(404), :raise_errors => true)
-      expect { client.call(:authenticate) }.to raise_error(Savon::HTTPError)
+      expect { client.call(:authenticate) }.to raise_error(Reste::HTTPError)
     end
 
-    it "when false, instructs Savon to not raise SOAP fault errors" do
+    it "when false, instructs Reste to not raise SOAP fault errors" do
       client = new_client(:endpoint => @server.url(:repeat), :raise_errors => false)
       response = client.call(:authenticate, :xml => Fixture.response(:soap_fault))
 
@@ -225,7 +225,7 @@ describe "Options" do
       expect(response).to be_a_soap_fault
     end
 
-    it "when false, instructs Savon to not raise HTTP errors" do
+    it "when false, instructs Reste to not raise HTTP errors" do
       client = new_client(:endpoint => @server.url(404), :raise_errors => false)
       response = client.call(:authenticate)
 
@@ -235,7 +235,7 @@ describe "Options" do
   end
 
   context "global :log" do
-    it "instructs Savon not to log SOAP requests and responses" do
+    it "instructs Reste not to log SOAP requests and responses" do
       stdout = mock_stdout {
         client = new_client(:endpoint => @server.url, :log => false)
         client.call(:authenticate)
@@ -249,7 +249,7 @@ describe "Options" do
       new_client(:log => false)
     end
 
-    it "instructs Savon to log SOAP requests and responses" do
+    it "instructs Reste to log SOAP requests and responses" do
       stdout = mock_stdout do
         client = new_client(:endpoint => @server.url, :log => true)
         client.call(:authenticate)
@@ -578,7 +578,7 @@ describe "Options" do
     end
 
     it "accepts a block in the block-based interface" do
-      client = Savon.client do |globals|
+      client = Reste.client do |globals|
         globals.log                      false
         globals.wsdl                     Fixture.wsdl(:authentication)
         globals.endpoint                 @server.url(:repeat)
@@ -607,7 +607,7 @@ describe "Options" do
     end
 
     it "accepts a block in the block-based interface" do
-      client = Savon.client do |globals|
+      client = Reste.client do |globals|
         globals.log                      false
         globals.wsdl                     Fixture.wsdl(:authentication)
         globals.endpoint                 @server.url(:repeat)
@@ -625,10 +625,10 @@ describe "Options" do
   context 'global: :adapter' do
     it 'passes option to Wasabi initializer for WSDL fetching' do
       ## I want to use there something similar to the next mock expectation, but I can't
-      ## as due to how Savon sets up Wasabi::Document and Wasabi::Document initialize itself
+      ## as due to how Reste sets up Wasabi::Document and Wasabi::Document initialize itself
       ## adapter= method is called first time with nil and second time with adapter. [Envek, 2014-05-03]
       # Wasabi::Document.any_instance.expects(:adapter=).with(:fake_adapter_for_test)
-      client = Savon.client(
+      client = Reste.client(
           :log => false,
           :wsdl => @server.url(:authentication),
           :adapter => :fake_adapter_for_test,
@@ -718,13 +718,13 @@ describe "Options" do
       expect(response.http.body).to include("<tns:doAuthenticate></tns:doAuthenticate>")
     end
 
-    it "without it, Savon tries to get the message tag from the WSDL document" do
+    it "without it, Reste tries to get the message tag from the WSDL document" do
       response = new_client(:endpoint => @server.url(:repeat)).call(:authenticate)
       expect(response.http.body).to include("<tns:authenticate></tns:authenticate>")
     end
 
-    it "without the option and a WSDL, Savon defaults to Gyoku to create the name" do
-      client = Savon.client(:endpoint => @server.url(:repeat), :namespace => "http://v1.example.com", :log => false)
+    it "without the option and a WSDL, Reste defaults to Gyoku to create the name" do
+      client = Reste.client(:endpoint => @server.url(:repeat), :namespace => "http://v1.example.com", :log => false)
 
       response = client.call(:init_authentication)
       expect(response.http.body).to include("<wsdl:initAuthentication></wsdl:initAuthentication>")
@@ -741,7 +741,7 @@ describe "Options" do
   end
 
   context "request: soap_action" do
-    it "without it, Savon tries to get the SOAPAction from the WSDL document and falls back to Gyoku" do
+    it "without it, Reste tries to get the SOAPAction from the WSDL document and falls back to Gyoku" do
       client = new_client(:endpoint => @server.url(:inspect_request))
 
       response = client.call(:authenticate)
@@ -821,12 +821,12 @@ describe "Options" do
 
   def new_client(globals = {}, &block)
     globals = { :wsdl => Fixture.wsdl(:authentication), :log => false }.merge(globals)
-    Savon.client(globals, &block)
+    Reste.client(globals, &block)
   end
 
   def new_client_without_wsdl(globals = {}, &block)
     globals = { :log => false }.merge(globals)
-    Savon.client(globals, &block)
+    Reste.client(globals, &block)
   end
 
   def inspect_request(response)

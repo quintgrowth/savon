@@ -1,7 +1,7 @@
 require "spec_helper"
 require "integration/support/server"
 
-describe Savon::Message do
+describe Reste::Message do
 
   before do
     @server = IntegrationServer.run
@@ -13,7 +13,7 @@ describe Savon::Message do
 
   context "with a qualified message" do
     it "converts request Hash keys for which there is not namespace" do
-      client = Savon.client(
+      client = Reste.client(
         :endpoint => @server.url(:repeat),
         :namespace => 'http://example.com',
         :log => false,

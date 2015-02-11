@@ -8,4 +8,4 @@ rvm:
   - jruby
   - rbx-2
 notifications:
-  irc: "irc.freenode.org#savon"
+  irc: "irc.freenode.org#reste"

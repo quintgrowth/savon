@@ -6,10 +6,10 @@ require "reste/version"
 
 Gem::Specification.new do |s|
   s.name        = "reste"
-  s.version     = Savon::VERSION
+  s.version     = Reste::VERSION
   s.authors     = "Daniel Harrington"
   s.email       = "me@rubiii.com"
-  s.homepage    = "http://savonrb.com"
+  s.homepage    = "http://resterb.com"
   s.summary     = "Heavy metal SOAP client"
   s.description = s.summary
 

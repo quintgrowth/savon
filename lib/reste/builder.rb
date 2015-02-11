@@ -4,7 +4,7 @@ require "nokogiri"
 require "builder"
 require "gyoku"
 
-module Savon
+module Reste
   class Builder
 
     SCHEMA_TYPES = {

@@ -1,16 +1,16 @@
 require "reste/mock"
 
-module Savon
+module Reste
   module SpecHelper
 
     class Interface
 
       def mock!
-        Savon.observers << self
+        Reste.observers << self
       end
 
       def unmock!
-        Savon.observers.clear
+        Reste.observers.clear
       end
 
       def expects(operation_name)
@@ -49,13 +49,13 @@ module Savon
 
     end
 
-    def savon
-      @savon ||= Interface.new
+    def reste
+      @reste ||= Interface.new
     end
 
     def verify_mocks_for_rspec
       super if defined? super
-      savon.verify!
+      reste.verify!
     end
 
   end

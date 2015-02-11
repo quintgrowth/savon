@@ -1,7 +1,7 @@
 require "reste/qualified_message"
 require "gyoku"
 
-module Savon
+module Reste
   class Message
 
     def initialize(message_tag, namespace_identifier, types, used_namespaces, message, element_form_default, key_converter)

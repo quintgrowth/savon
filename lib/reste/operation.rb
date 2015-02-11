@@ -5,7 +5,7 @@ require "reste/builder"
 require "reste/response"
 require "reste/request_logger"
 
-module Savon
+module Reste
   class Operation
 
     def self.create(operation_name, wsdl, globals)
@@ -47,7 +47,7 @@ module Savon
     def call(locals = {}, &block)
       builder = build(locals, &block)
 
-      response = Savon.notify_observers(@name, builder, @globals, @locals)
+      response = Reste.notify_observers(@name, builder, @globals, @locals)
       response ||= call_with_logging build_request(builder)
 
       raise_expected_httpi_response! unless response.kind_of?(HTTPI::Response)
@@ -68,10 +68,10 @@ module Savon
     def multipart_supported?
       return false unless @globals[:multipart] || @locals[:multipart]
 
-      if Savon.const_defined? :Multipart
+      if Reste.const_defined? :Multipart
         true
       else
-        raise 'Unable to find Savon::Multipart. Make sure the savon-multipart gem is installed and loaded.'
+        raise 'Unable to find Reste::Multipart. Make sure the reste-multipart gem is installed and loaded.'
       end
     end
 

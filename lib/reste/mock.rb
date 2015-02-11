@@ -1,4 +1,4 @@
-module Savon
+module Reste
   class ExpectationError < StandardError; end
 end
 

@@ -1,6 +1,6 @@
 require "reste"
 
-module Savon
+module Reste
   class SOAPFault < Error
 
     def self.present?(http)

@@ -1,25 +1,25 @@
 require "spec_helper"
 
-describe Savon::Response do
+describe Reste::Response do
 
-  let(:globals) { Savon::GlobalOptions.new }
-  let(:locals)  { Savon::LocalOptions.new }
+  let(:globals) { Reste::GlobalOptions.new }
+  let(:locals)  { Reste::LocalOptions.new }
 
   describe ".new" do
-    it "should raise a Savon::Fault in case of a SOAP fault" do
-      lambda { soap_fault_response }.should raise_error(Savon::SOAPFault)
+    it "should raise a Reste::Fault in case of a SOAP fault" do
+      lambda { soap_fault_response }.should raise_error(Reste::SOAPFault)
     end
 
-    it "should not raise a Savon::Fault in case the default is turned off" do
+    it "should not raise a Reste::Fault in case the default is turned off" do
       globals[:raise_errors] = false
       lambda { soap_fault_response }.should_not raise_error
     end
 
-    it "should raise a Savon::HTTP::Error in case of an HTTP error" do
-      lambda { soap_response :code => 500 }.should raise_error(Savon::HTTPError)
+    it "should raise a Reste::HTTP::Error in case of an HTTP error" do
+      lambda { soap_response :code => 500 }.should raise_error(Reste::HTTPError)
     end
 
-    it "should not raise a Savon::HTTP::Error in case the default is turned off" do
+    it "should not raise a Reste::HTTP::Error in case the default is turned off" do
       globals[:raise_errors] = false
       soap_response :code => 500
     end
@@ -61,7 +61,7 @@ describe Savon::Response do
     end
 
     it "should return a SOAPFault in case of a SOAP fault" do
-      soap_fault_response.soap_fault.should be_a(Savon::SOAPFault)
+      soap_fault_response.soap_fault.should be_a(Reste::SOAPFault)
     end
   end
 
@@ -85,7 +85,7 @@ describe Savon::Response do
     end
 
     it "should return a HTTPError in case of an HTTP error" do
-      soap_response(:code => 500).http_error.should be_a(Savon::HTTPError)
+      soap_response(:code => 500).http_error.should be_a(Reste::HTTPError)
     end
   end
 
@@ -129,7 +129,7 @@ describe Savon::Response do
     end
 
     it "should throw an exception when the response header isn't parsable" do
-      lambda { invalid_soap_response.header }.should raise_error Savon::InvalidResponseError
+      lambda { invalid_soap_response.header }.should raise_error Reste::InvalidResponseError
     end
   end
 
@@ -246,7 +246,7 @@ describe Savon::Response do
     response = defaults.merge options
     http_response = HTTPI::Response.new(response[:code], response[:headers], response[:body])
 
-    Savon::Response.new(http_response, globals, locals)
+    Reste::Response.new(http_response, globals, locals)
   end
 
   def soap_fault_response
@@ -262,7 +262,7 @@ describe Savon::Response do
     response = defaults.merge options
     http_response = HTTPI::Response.new(response[:code], response[:headers], response[:body])
 
-    Savon::Response.new(http_response, globals, locals)
+    Reste::Response.new(http_response, globals, locals)
   end
 
 end

@@ -1,4 +1,4 @@
-module Savon
+module Reste
   module Model
 
     def self.extended(base)
@@ -48,7 +48,7 @@ module Savon
       @class_operation_module ||= Module.new {
 
         def client(globals = {})
-          @client ||= Savon::Client.new(globals)
+          @client ||= Reste::Client.new(globals)
         rescue InitializationError
           raise_initialization_error!
         end

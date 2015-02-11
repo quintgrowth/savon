@@ -1,4 +1,4 @@
-module Savon
+module Reste
 
   Error                 = Class.new(RuntimeError)
   InitializationError   = Class.new(Error)

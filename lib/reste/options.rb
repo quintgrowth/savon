@@ -1,7 +1,7 @@
 require "logger"
 require "httpi"
 
-module Savon
+module Reste
   class Options
 
     def initialize(options = {})
@@ -156,7 +156,7 @@ module Savon
       @options[:log] = log
     end
 
-    # The logger to use. Defaults to a Savon::Logger instance.
+    # The logger to use. Defaults to a Reste::Logger instance.
     def logger(logger)
       @options[:logger] = logger
     end
@@ -263,12 +263,12 @@ module Savon
       @options[:convert_attributes_to] = block || converter
     end
 
-    # Instruct Savon to create a multipart response if available.
+    # Instruct Reste to create a multipart response if available.
     def multipart(multipart)
       @options[:multipart] = multipart
     end
 
-    # Instruct Savon what HTTPI adapter it should use instead of default
+    # Instruct Reste what HTTPI adapter it should use instead of default
     def adapter(adapter)
       @options[:adapter] = adapter
     end
@@ -305,7 +305,7 @@ module Savon
       @options[:message] = message
     end
 
-    # SOAP message tag (formerly known as SOAP input tag). If it's not set, Savon retrieves the name from
+    # SOAP message tag (formerly known as SOAP input tag). If it's not set, Reste retrieves the name from
     # the WSDL document (if available). Otherwise, Gyoku converts the operation name into an XML element.
     def message_tag(message_tag)
       @options[:message_tag] = message_tag
@@ -341,7 +341,7 @@ module Savon
       @options[:response_parser] = parser
     end
 
-    # Instruct Savon to create a multipart response if available.
+    # Instruct Reste to create a multipart response if available.
     def multipart(multipart)
       @options[:multipart] = multipart
     end

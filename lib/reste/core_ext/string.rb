@@ -1,10 +1,10 @@
 
-module Savon
+module Reste
   module CoreExt
     module String
 
       def self.included(base)
-        unless "savon".respond_to?(:snakecase)
+        unless "reste".respond_to?(:snakecase)
           base.send(:include, Extension)
         end
       end
@@ -26,4 +26,4 @@ module Savon
   end
 end
 
-String.send :include, Savon::CoreExt::String
+String.send :include, Reste::CoreExt::String

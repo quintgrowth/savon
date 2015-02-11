@@ -2,7 +2,7 @@ require "akami"
 require "gyoku"
 require "uuid"
 
-module Savon
+module Reste
   class Header
 
     def initialize(globals, locals)

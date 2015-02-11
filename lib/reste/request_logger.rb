@@ -1,6 +1,6 @@
 require "reste/log_message"
 
-module Savon
+module Reste
   class RequestLogger
 
     def initialize(globals)
